@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-
+QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+
+   <link rel="stylesheet" href="sample.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" />
+
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=check_circle" />
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=check_circle" />
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+
+  <title>Employees list</title>
+</head>
+
+<body>
+
+  <div class="container-fluid p-0 m-0 d-flex">
+    <div class="side_bar">
+      <div class="px-5 py-3 gap-5 d-flex flex-column" style="width: 100%;">
+        <div class="heading" style="font-family: poppins !important;">
+          <h2>Employee</h2>
+          <h3>Management</h3>
+        </div>
+        <div class="menu mt-3 d-flex flex-column px-1 gap-3">
+          <button class="content d-flex gap-2">
+            <i class="bi bi-house-door-fill"></i>
+            <h5>Dashboard</h5>
+          </button>
+
+          <button class="content d-flex gap-2">
+            <i class="bi bi-bar-chart-fill"></i>
+            <h5>Employees</h5>
+          </button>
+
+          <button class="content d-flex gap-2">
+            <i class="bi bi-person-fill"></i>
+            <h5>My Profile</h5>
+          </button>
+
+          <button class="content d-flex gap-2">
+            <i class="bi bi-lock-fill"></i>
+            <h5>Logout</h5>
+          </button>
+
+          <div class="powered_by ">
+            <h5>Powered by <img src="images/image 1.png" alt="image"></h5>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="mainpage container p-0">
+      <nav class="navbar px-2">
+        <div class="px-3 py-2">
+          <small class="dash">Dashboard / Employees</small>
+          <h4>Employees</h4>
+        </div>
+        <div class="rounded-pill search_bar">
+          <form class="d-flex notification" role="search">
+            <i class="bi bi-search"></i>
+            <input class="form-control me-2 rounded-pill search" type="search" placeholder="Search" aria-label="Search"
+              name="as" id="search">
+          </form>
+          <i class="bi bi-bell"></i>
+          <img src="images/Elipse 5.png" alt="image" class="profile_pic">
+        </div>
+      </nav>
+
+      <div  id="employeeTableBox" >
+        <div class="container-fluid employee_list  d-flex px-3 py-2 justify-content-between" >
+          <div class="emple_option d-flex"   >
+            <h4>Employees List</h4>
+            <!-- <div class="filterEntries"> -->
+             <div class="entries">
+                   <select name="" id="table_size">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                  </select> 
+                  <h6>of 10</h6>
+              </div>
+            
+          </div>
+          <button type="button" class="btn-btn-lg" id="empAddBtn" onclick="openAddEmployeeModal()" >Add Employee</button>
+  
+  
+  
+        </div>
+        <table class="table" id="employeeTable">
+          <thead>
+            <tr>
+              <th scope="col">Sl.No <i class="bi bi-chevron-down"></i></th>
+              <th scope="col">Name <i class="bi bi-chevron-down"></i></th>
+              <th scope="col">Email <i class="bi bi-chevron-down"></i></th>
+              <th scope="col">Phone <i class="bi bi-chevron-down"></i> </th>
+              <th scope="col">Gender <i class="bi bi-chevron-down"></i></th>
+              <th scope="col">DOB <i class="bi bi-chevron-down"></i></th>
+              <th scope="col">Country <i class="bi bi-chevron-down"></i></th>
+              <th scope="col"> </th>
+            </tr>
+  
+          <tbody id="tableBody">
+           
+  
+  
+          </tbody>
+          </thead>
+        </table>
+  
+  
+  
+       <!-- Pagination -->
+       <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item" id="previousBtn">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">4</a></li>
+          <li class="page-item"><a class="page-link" href="#">5</a></li>
+          <li class="page-item"><a class="page-link" href="#">6</a></li>
+          <li class="page-item"><a class="page-link" href="#">7</a></li>
+          <li class="page-item"><a class="page-link" href="#">8</a></li>
+          <li class="page-item"><a class="page-link" href="#">9</a></li>
+          <li class="page-item"><a class="page-link" href="#">10</a></li>
+       
+          <li class="page-item" id="nextBtn">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+  
+  
+            </a>
+          </li>
+        </ul>
+      </nav>
+      </div>
+
+
+        <div id="viewDetailBox" style="display: none;">
+
+          <div class="userview_form">
+            <div class="userBgImage col-12">
+              <img src="images/Background.png" alt="image">
+            </div>
+            <div class="userProfileImage">
+              <img src="images/Elipse 5.png" alt="img">
+            </div>
+            <div class="usernameInfo">
+              <span id="nameView">Mr. Michael Johnson</span>
+              <span id="emailView" class="email">michaeljohnson@example.com</span>
+            </div>
+      
+            <div class="userFirstRow col-12 my-3 d-flex">
+              <div class="employeeGender col-4 d-flex flex-column">
+                <span class="small">Gender</span>
+                <span class="large" id="viewGender">Male</span>
+              </div>
+              <div class="employeeAge col-3 d-flex flex-column">
+                <span class="small">Age</span>
+                <span id="viewAge" class="large">21</span>
+              </div>
+              <div class="employeeDob col-4 d-flex flex-column">
+                <span class="small">Date Of Birth</span>
+                <span class="large" id="viewDob">1985-12-10</span>
+              </div>
+            </div>
+            <div class="userSecndRow col-12 d-flex">
+              <div class="employeeNumber col-5 d-flex flex-column">
+                <span class="small">Mobile Number</span>
+                <span id="viewNumber" class="large">5551234567</span>
+              </div>
+              <div class="employeeQualification col-6 d-flex flex-column">
+                <span class="small">Qualifications</span>
+                <span id="viewQualification" class="large">Bachelor's Degree</span>
+              </div>
+            </div>
+            <div class="userThirdRow col-12 my-3 d-flex ">
+              <div class="employeeAddress col-5 d-flex flex-column">
+                <span class="small">Address</span>
+                <span id="viewAddress" class="large">789 st dummy address,chickago</span>
+              </div>
+              <div class="employee-username col-6 d-flex flex-column">
+                <span class="small">Username</span>
+                <span id="viewusername" class="large">michaeljohnson</span>
+                </div>
+                
+                </div>
+                <div class="userFourthRow col-12 my-4">
+                <div class="lastButn col-4 ">
+                <button type="button" class="redBtn" id="viewDelete" onclick="viewDeletePopup()">Delete</button>
+                <button type="button" class="editBtn" id="viewEditChange" onclick="viewEditPopup()">Edit Details</button>
+                
+                </div>
+                
+                </div>
+                
+                </div>
+        
+  
+
+
+
+   <!-- add employee form -->
+
+   <div class="modal" id="addEmployeeModal" tabindex="-1" aria-labelledby="
+   employeeModalLabel" aria-hidden="true"
+   
+       style="background-color: #050310CC;">
+       <div class="modal-dialog">
+         <div class="modal-content">
+           <div class="modal-header">
+             <button type="button" class="btn-close" id="closeModalbutton" onclick="closeAddEmployeeModal()" aria-label="Close"></button>
+           </div>
+           <div class="modal-body">
+   
+   
+   
+             <!-- bootstrap starts here  -->
+   
+   
+             <div class=" bootstrap container-fluid">
+   
+               <form id="add_employee" enctype="multipart/form-data" >
+   
+                 <div class="row gap-2 d-flex justify-content-center flex-column;">
+   
+                   <div class="col-lg p-3 bg-white" style="border-radius: 22px;">
+                     <h4 class="form_head">Add Employee</h4>
+                     <label class="upload d-flex flex-column align-items-center" for="upload"
+                       style="border:dashed 1px ; border-radius: 2px; padding: 40px; border-color: #B2BAD0; ">
+   
+   
+                       <i class="fa-solid fa-upload" style="color: #4318FF;"></i>
+                       <h5 style="color: #4318FF;">Upload Image</h5>
+                       <input type="file" name="FILE" id="addEmployeeImage"   >
+                       <h6 style="color: #8F9BBA; align-items: center; font-size: 11px; font-weight: 500;">PNG, JPG
+                         files are allowed</h6>
+                     </label>
+   
+   
+   
+                     <!-- salutation  -->
+   
+                     <div class="row d-flex flex-md-nowrap " style="padding: 10px;">
+                       <div class="col-md-3 p-1">
+                         <label for="salutation" class="form-label">Salutation</label>
+   
+   
+                         <select name="salutation" id="salutationAddInp" class="form-select">
+                           <option selected>select</option>
+                           <option value="Mr" selected>Mr.</option>
+                           <option value="Mrs">Mrs.</option>
+                           <option value="Miss">Miss.</option>
+                         </select>
+                         <span style="font-size: 12px; display: flex;"></span>
+                       </div>
+   
+   
+                       <!-- firstname                 -->
+                       <div class="col-md-4 p-1">
+                         <label for="firstName" class="form-label">First name</label>
+                         <input type="text" value="jewl" class="form-control" id="firstNameAddInp" placeholder="john" name="firstName">
+                         <span style="font-size: 12px; display: flex;"></span>
+                       </div>
+   
+   
+                       <!-- lastname              -->
+                       <div class="col-md-5 p-1">
+                         <label for="lastName" class="form-label">Last name</label>
+                         <input type="text" value="john" class="form-control" id="lastNameAddInp" placeholder="doe" name="lastName">
+                         <span style="font-size: 12px; display: flex;"></span>
+                       </div>
+                     </div>
+   
+   
+   
+                     <!-- email  -->
+                     <div class="row d-flex flex-md-nowrap " style="padding: 10px;">
+                       <div class="col-md-6 p-1">
+                         <label for="email"  class="form-label">Email Address</label>
+                         <input type="emailaddress" value="jwel@gmail.com" class="form-control" id="emailAddInp" placeholder="mail@simmmple.com"
+   
+   
+                           name="email" style="color: #949DB9;" autocomplete="off">
+                         <span style="font-size: 12px; display: flex;"></span>
+                       </div>
+   
+   
+   
+                       <!-- mobilenumber -->
+                       <div class="col-md-6 p-1">
+                         <label for="phone" class="form-label">Mobile Number</label>
+                         <input type="mobilenumber" value="9863567654" class="form-control" id="mobileAddInp" placeholder="Enter the mobile number"
+                           name="phone" autocomplete="off" required>
+                         <span style="font-size: 12px; display: flex;"></span>
+                       </div>
+                     </div>
+   
+   
+   
+                     <!-- date of birth  -->
+                     <div class="row d-flex flex-md-nowrap align-items-center " style="padding: 10px;">
+                       <div class="col-md-6 p-1">
+                         <label for="dob" class="form-label">Date Of Birth</label>
+                         <input type="date" name="dob" class="form-control" id="dobAddInp" placeholder="select date of birth">
+                         <span style="font-size: 12px; display: flex;"></span>
+                       </div>
+   
+   
+   
+   
+                       <!-- gender              -->
+                       <div class="col-md-6 p-1">
+                         <h6 style="color: #2B3674; font-weight: 500; font-size: 14px;" id="gender">Gender <span
+                             class="star">*</span></h6>
+   
+                         <div class="form-check form-check-inline">
+                           <input class="form-check-input" checked type="radio" name="gender" id="maleAddInp" value="male">
+                           <label class="form-check-label" for="inlineRadiomale">Male</label>
+                         </div>
+                         <div class="form-check form-check-inline">
+                           <input class="form-check-input" type="radio" name="gender" id="femaleAddInp"
+                             value="female">
+                           <label class="form-check-label" for="inlineRadiofemale">Female</label>
+                         </div>
+                         <span style="font-size: 12px; display: flex;"></span>
+                       </div>
+                     </div>
+   
+   
+   
+   
+                     <!-- qualification              -->
+                     <div class="col-12 p-1 mt-3 ">
+                       <label for="qualification" class="label"
+                         style="color: #2B3674; font-size: 14px; font-weight: 500;">Qualification</label>
+                       <input type="text" class="form-control" value="hjgqsgs" id="qualificationAddInp" name="qualifications"
+                         placeholder="Enter qualification">
+                       <span style="font-size: 12px; display: flex;"></span>
+                     </div>
+   
+   
+   
+   
+                     <!-- address -->
+                     <div class="row d-flex flex-md-nowrap " style="padding: 10px;">
+                       <div class="col-12 p-1">
+                         <label for="address" class="form-label">Address</label>
+   
+   
+                         <input type="text" class="form-control" id="addressAddInp" value="qgfdscfqWFEWTFQTUFEUT" name="address" placeholder="Enter address"
+                           autocomplete="off">
+                         <span style="font-size: 12px; display: flex;"></span>
+                       </div>
+                     </div>
+   
+   
+   
+                     <!-- country  -->
+                     <div class="row d-flex flex-md-nowrap " style="padding: 10px;">
+                       <div class="col-md-6 p-1">
+                         <label for="country" class="form-label">Country</label>
+   
+   
+                         <select id="countryAddInp" name="country" class="form-select" autocomplete="off">
+                           <option style="color: #949DB9;" value="0" selected>select country</option>
+                           <option value="india" selected>India</option>
+                           <option value="pakistan">Pakistan</option>
+                           <option value="china">china</option>
+                         </select>
+                         <span style="font-size: 12px; display: flex;"></span>
+                       </div>
+   
+   
+   
+                        
+                       <!-- state  -->
+                       <div class="col-md-6 p-1">
+                         <label for="state" class="form-label">State</label>
+                         <select id="stateAddInp" name="state" class="form-select">
+                           <option  value="0" >select state</option>
+                           <option selected value="kerala">Kerala</option>
+                           <option value="tamilNadu">Tamil Nadu</option>
+                           <option value="maharashtra">Maharashtra</option>
+   
+                         </select>
+                         <span style="font-size: 12px; display: flex;"></span>
+                       </div>
+                     </div>
+   
+   
+   
+                     <!-- city  -->
+                     <div class="row d-flex flex-md-nowrap " style="padding: 10px;">
+                       <div class="col-md-6 p-1">
+                         <label for="city" class="form-label">City</label>
+   
+   
+                         <input type="text" name="city" value="WBQHGE" class="form-control" id="cityAddInp" placeholder="Enter city">
+                         <span style="display: none; font-size: 12px;"></span>
+                       </div>
+   
+                         
+   
+   
+                       <!-- pin  -->
+                       <div class="col-md-6 p-1">
+                         <label for=" inputPin" class="form-label">Pin/Zip</label>
+   
+   
+                         <input type="pin/zip" name="pin" value="567543" class="form-control" id="pinAddInp" placeholder="Enter pin/zip">
+                         <span style="font-size: 12px; display: flex;"></span>
+                       </div>
+                     </div>
+   
+   
+   
+                     <!-- username  -->
+                     <div class="row d-flex flex-md-nowrap " style="padding: 10px;">
+                       <div class="col-md-6 p-1">
+                         <label for="username" class="form-label">username</label>
+   
+   
+                         <input type="text" name="username" value="eertynhd" class="form-control" id="usernameAddInp" placeholder="Enter username"
+                           autocomplete="off">
+                         <span style="font-size: 12px; display: flex;"></span>
+                       </div>
+   
+   
+   
+                       <!-- password  -->
+                       <div class="col-md-6 p-1">
+                         <label for="password" class="form-label">Password</label>
+   
+   
+                         <input type="password" name="password" value="123456" class="form-control" id="passwordAddInp"
+                           placeholder="Enter password" autocomplete="off">
+                         <span style="font-size: 12px; display: flex;"></span>
+                       </div>
+                     </div>
+   
+   
+                     <div class="button">
+                       <button class="button-transparent -btn p-3" id="addCancelBtn"> Cancel</button>
+                       <button class="btn-btn-lg" type="button" id="submitBtnAdd" onclick="getAddFormData()">Add Employee</button>
+              
+                     </div>
+                   </div>
+                 </div>
+               </form>
+   
+        
+   
+   
+             </div>
+           </div>
+   
+         </div>
+   
+          
+   
+         <!-- bootstrap ends    -->
+   
+       </div>
+     </div>
+   
+
+
+     <!-- edit employee form  -->
+
+
+     <div class="modal" id="editEmployeeModal" tabindex="-1" aria-labelledby="
+     employeeModalLabel" 
+     
+         style="background-color: #050310CC;">
+         <div class="modal-dialog">
+           <div class="modal-content">
+             <div class="modal-header">
+               <button type="button" class="btn-close" id="closeModalbutton" onclick="closeEditEmployeeModalFunction()" aria-label="Close"></button>
+             </div>
+             <div class="modal-body">
+     
+     
+     
+               <!-- bootstrap starts here  -->
+     
+     
+               <div class=" bootstrap container-fluid">
+     
+                 <form id="edit_employee" enctype="multipart/form-data" >
+     
+                   <div class="row gap-2 d-flex justify-content-center flex-column;">
+     
+                     <div class="col-lg p-3 bg-white" style="border-radius: 22px;">
+                       <h4 class="form_head">Edit Employee</h4>
+                       <label class="upload d-flex flex-column align-items-center" for="upload"
+                         style="border:dashed 1px ; border-radius: 2px; padding: 40px; border-color: #B2BAD0; ">
+     
+     
+                         <i class="fa-solid fa-upload" style="color: #4318FF;"></i>
+                         <h5 style="color: #4318FF;">Upload Image</h5>
+                         <input type="file" id="upload" hidden>
+                         <h6 style="color: #8F9BBA; align-items: center; font-size: 11px; font-weight: 500;">PNG, JPG
+                           files are allowed</h6>
+                       </label>
+     
+     
+     
+                       <!-- salutation  -->
+     
+                       <div class="row d-flex flex-md-nowrap " style="padding: 10px;">
+                         <div class="col-md-3 p-1">
+                           <label for="salutation" class="form-label">Salutation</label>
+                       
+                            <input type="text" name="empId" class="form-control" id="employeeIdInp" hidden>
+                        
+     
+                           <select name="salutation" id="salutationEditInp" class="form-select">
+                             <option selected>select</option>
+                             <option value="Mr">Mr.</option>
+                             <option value="Mrs">Mrs.</option>
+                             <option value="Miss">Miss.</option>
+                           </select>
+                           <span style="font-size: 12px; display: flex;"></span>
+                         </div>
+     
+     
+                         <!-- firstname                 -->
+                         <div class="col-md-4 p-1">
+                           <label for="firstName" class="form-label">First name</label>
+                           <input type="text" class="form-control" id="firstNameEditInp" placeholder="john" name="firstName">
+                           <span style="font-size: 12px; display: flex;"></span>
+                         </div>
+     
+     
+                         <!-- lastname              -->
+                         <div class="col-md-5 p-1">
+                           <label for="lastName" class="form-label">Last name</label>
+                           <input type="text" class="form-control" id="lastNameEditInp" placeholder="doe" name="lastName">
+                           <span style="font-size: 12px; display: flex;"></span>
+                         </div>
+                       </div>
+     
+     
+     
+                       <!-- email  -->
+                       <div class="row d-flex flex-md-nowrap " style="padding: 10px;">
+                         <div class="col-md-6 p-1">
+                           <label for="email" class="form-label">Email Address</label>
+                           <input type="emailaddress" class="form-control" id="emailEditInp" placeholder="mail@simmmple.com"
+     
+     
+                             name="email" style="color: #949DB9;" autocomplete="off">
+                           <span style="font-size: 12px; display: flex;"></span>
+                         </div>
+     
+     
+     
+                         <!-- mobilenumber -->
+                         <div class="col-md-6 p-1">
+                           <label for="phone" class="form-label">Mobile Number</label>
+                           <input type="mobilenumber" class="form-control" id="mobileEditInp" placeholder="Enter the mobile number"
+                             name="phone" autocomplete="off" required>
+                           <span style="font-size: 12px; display: flex;"></span>
+                         </div>
+                       </div>
+     
+     
+     
+                       <!-- date of birth  -->
+                       <div class="row d-flex flex-md-nowrap align-items-center " style="padding: 10px;">
+                         <div class="col-md-6 p-1">
+                           <label for="dob" class="form-label">Date Of Birth</label>
+                           <input type="date" name="dob" class="form-control" id="dobEditInp" placeholder="select date of birth">
+                           <span style="font-size: 12px; display: flex;"></span>
+                         </div>
+     
+                        
+     
+     
+                         <!-- gender              -->
+                         <div class="col-md-6 p-1">
+                           <h6 style="color: #2B3674; font-weight: 500; font-size: 14px;" id="gender">Gender <span
+                               class="star">*</span></h6>
+     
+                           <div class="form-check form-check-inline">
+                             <input class="form-check-input" type="radio" name="gender" id="maleEditInp" value="male">
+                             <label class="form-check-label" for="inlineRadiomale">Male</label>
+                           </div>
+                           <div class="form-check form-check-inline">
+                             <input class="form-check-input" type="radio" name="gender" id="femaleEditInp"
+                               value="female">
+                             <label class="form-check-label" for="inlineRadiofemale">Female</label>
+                           </div>
+                           <span style="font-size: 12px; display: flex;"></span>
+                         </div>
+                       </div>
+     
+     
+     
+     
+                       <!-- qualification              -->
+                       <div class="col-12 p-1 mt-3 ">
+                         <label for="qualification" class="label"
+                           style="color: #2B3674; font-size: 14px; font-weight: 500;">Qualification</label>
+                         <input type="text" class="form-control" id="qualificationEditInp" name="qualifications"
+                           placeholder="Enter qualification">
+                         <span style="font-size: 12px; display: flex;"></span>
+                       </div>
+     
+     
+     
+     
+                       <!-- address -->
+                       <div class="row d-flex flex-md-nowrap " style="padding: 10px;">
+                         <div class="col-12 p-1">
+                           <label for="address" class="form-label">Address</label>
+     
+     
+                           <input type="text" class="form-control" id="addressEditInp" name="address" placeholder="Enter address"
+                             autocomplete="off">
+                           <span style="font-size: 12px; display: flex;"></span>
+                         </div>
+                       </div>
+     
+     
+     
+                       <!-- country  -->
+                       <div class="row d-flex flex-md-nowrap " style="padding: 10px;">
+                         <div class="col-md-6 p-1">
+                           <label for="country" class="form-label">Country</label>
+     
+     
+                           <select id="countryEditInp" name="country" class="form-select" autocomplete="off">
+                             <option style="color: #949DB9;" value="0" selected>select country</option>
+                             <option value="india">India</option>
+                             <option value="pakistan">Pakistan</option>
+                             <option value="china">china</option>
+                           </select>
+                           <span style="font-size: 12px; display: flex;"></span>
+                         </div>
+     
+     
+     
+                          
+                         <!-- state  -->
+                         <div class="col-md-6 p-1">
+                           <label for="state" class="form-label">State</label>
+                           <select id="stateEditInp" name="state" class="form-select">
+                             <option selected value="0" >select state</option>
+                             <option value="kerala">Kerala</option>
+                             <option value="tamilNadu">Tamil Nadu</option>
+                             <option value="maharashtra">Maharashtra</option>
+     
+                           </select>
+                           <span style="font-size: 12px; display: flex;"></span>
+                         </div>
+                       </div>
+     
+     
+     
+                       <!-- city  -->
+                       <div class="row d-flex flex-md-nowrap " style="padding: 10px;">
+                         <div class="col-md-6 p-1">
+                           <label for="city" class="form-label">City</label>
+     
+     
+                           <input type="text" name="city" class="form-control" id="cityEditInp" placeholder="Enter city">
+                           <span style="display: none; font-size: 12px;"></span>
+                         </div>
+     
+                           
+     
+     
+                         <!-- pin  -->
+                         <div class="col-md-6 p-1">
+                           <label for=" inputPin" class="form-label">Pin/Zip</label>
+     
+     
+                           <input type="pin/zip" name="pin" class="form-control" id="pinEditInp" placeholder="Enter pin/zip">
+                           <span style="font-size: 12px; display: flex;"></span>
+                         </div>
+                       </div>
+     
+     
+     
+                       <!-- username  -->
+                       <div class="row d-flex flex-md-nowrap " style="padding: 10px;">
+                         <div class="col-md-6 p-1">
+                           <label for="username" class="form-label">username</label>
+     
+     
+                           <input type="text" name="username" class="form-control" id="usernameEditInp" placeholder="Enter username"
+                             autocomplete="off">
+                           <span style="font-size: 12px; display: flex;"></span>
+                         </div>
+     
+     
+     
+                         <!-- password  -->
+                         <div class="col-md-6 p-1">
+                           <label for="password" class="form-label">Password</label>
+     
+     
+                           <input type="password" name="password" class="form-control" id="passwordEditInp"
+                             placeholder="Enter password" autocomplete="off">
+                           <span style="font-size: 12px; display: flex;"></span>
+                         </div>
+                       </div>
+     
+     
+                       <div class="button">
+                         <button class="button-transparent -btn p-3" id="editCancelBtn"> Cancel</button>
+                         <button class="btn-btn-lg" type="submit"   id="submitBtnEdit">Save changes</button>
+                
+                       </div>
+                     </div>
+                   </div>
+                 </form>
+     
+          
+     
+     
+               </div>
+             </div>
+     
+           </div>
+     
+            
+     
+           <!-- bootstrap ends    -->
+     
+         </div>
+       </div>
+     
+
+</div>
+
+
+
+
+
+<script defer src="script.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+  crossorigin="anonymous"></script>
+
+  </body>
+  </html>
