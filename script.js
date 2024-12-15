@@ -84,7 +84,7 @@ let globalEmployeeArray = [];
 async function fetchEmployees() {
     
     try {
-      const response = await fetch("http://localhost:3000/employees");
+      const response = await fetch(`http://localhost:3000/employees`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
