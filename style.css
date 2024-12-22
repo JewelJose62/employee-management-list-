@@ -64,13 +64,13 @@ color: #FFFFFFB2;
 }
 
 .mainpage{
-  background: #F4F7FE; 
+  background: #F4F7FE;
 }
 .search_bar{
   background-color: #FFF;
-  
+ 
 }
-  
+ 
 
 .mainpage container h4{
   color: #2B3674;
@@ -123,21 +123,21 @@ text-align: left;
   background-color:transparent;
   color: #8F9BBA;
   border: none;
-  
+ 
 }
 
 .notification{
   background-color:  #F4F7FE;
   align-items: center;
   border-radius: 15px;
-  
+ 
 
 }
 
 .rounded-pill{
  display: flex;
  align-items: center;
- color: #A3AED0; 
+ color: #A3AED0;
  gap: 11px;
  padding: 3px 7px;
 }
@@ -188,7 +188,7 @@ text-align: left;
   align-items: center;
   border: none;
   border-radius: 17px;
-  
+ 
 }
 
 #saveChange{
@@ -198,7 +198,7 @@ text-align: left;
   align-items: center;
   border: none;
   border-radius: 17px;
-  
+ 
 }
 .emple_option d-flex{
   gap: 50pxpx;
@@ -207,13 +207,13 @@ text-align: left;
 .button-transparent{
 background-color: transparent;
 border-color: transparent1px solid;
-color: #2B3674; 
+color: #2B3674;
 font-size: 15px;
 font-weight: 500;
-border: none; 
-border-radius: 16px; 
+border: none;
+border-radius: 16px;
 background-color: #FAF9FF;
-  
+ 
 }
 .emple_option{
 gap: 7px;
@@ -314,12 +314,12 @@ padding: 15px;
  }
  .star{
    color: red;
- } 
+ }
 .form-label{
    color: #2B3674;
    font-size: 14px;
    font-weight: 500;
- } 
+ }
 
  .form-select{
   font-size: 12px;
@@ -332,14 +332,14 @@ padding: 15px;
  color: #2B3674;
 } */
 
-.form-control::placeholder{ 
+.form-control::placeholder{
  color: #949DB9;
 }
 
 .alert-warning{
  font-size: 12px;
  font-weight: 700;
-} 
+}
 
 .placeholder{
 color: #2B3674;
@@ -364,6 +364,10 @@ border-radius: 17px;
 padding: 10px 20px;
 }
 
+.modal-content{
+  width: 800px;
+  
+}
 
 .form_head{
   color: #4318FF;
@@ -398,10 +402,36 @@ text-align: center;
 #editEmployeeModal #edit_employee{
   max-width: 800px;
   margin: auto;
-  
+ 
  
 }
 
 #addEmployeeModal{
   display: none;
+}
+
+/* pagination style */
+
+.paginationButtonContainer{
+  display: flex;
+  gap: 10px;
+
+}
+.paginationButtonContainer button{
+  background-color:#2B3674;
+  color: white;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  padding: 10px 12px;
+}
+#paginationContainer{
+  display: flex;
+  gap: 10px;
+}
+
+.paginationButtonContainer{
+  display: flex;
+  justify-content: end;
 }
