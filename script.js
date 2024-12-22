@@ -69,10 +69,7 @@ addCancelBtn.addEventListener("click",()=>{
 })
 
 // pagination part
-async function employee(){
-
-
-  let rowsPerPage = 5;
+let rowsPerPage = 5;
   let currentPage = 1;
   let totalRows = globalEmployeeArray.length;
 
@@ -155,8 +152,6 @@ function changePageSize() {
   
   
 }
-}
-employee();
 
   //   display employees in table
   function displayEmployees(dataArray) {
