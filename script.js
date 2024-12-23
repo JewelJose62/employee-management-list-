@@ -73,15 +73,16 @@ let rowsPerPage = 5;
   let currentPage = 1;
   let totalRows = globalEmployeeArray.length;
 
+// calculate the total number of pages 
+  let totalPages = Math.ceil(totalRows/rowsPerPage)
 
-  // Calculate the start and end indices
+// Calculate the start and end indices
   let startIndex = (currentPage - 1) * rowsPerPage;
   let endIndex = startIndex + rowsPerPage;
 
 
   let prevBtn = document.getElementById('prevBtn');
   let nextBtn = document.getElementById('nextBtn');
-
   let initialRows = document.getElementById('rowsPerPage')
   
 console.log();
@@ -91,6 +92,10 @@ function displayPaginationTable(employeeArray,start,end) {
     displayEmployees(employeeArray.slice(start,end))
 }
 
+function updatePaginationBtn(){
+  prevBtn.disabled = currentPage === 1;
+  nextBtn.disabled = currentPage === totalPages;
+}
 
   // Previous button functionality
   prevBtn.onclick = () => {
@@ -99,6 +104,7 @@ function displayPaginationTable(employeeArray,start,end) {
        startIndex = (currentPage - 1) * rowsPerPage;
        endIndex = startIndex + rowsPerPage;
        displayPaginationTable(globalEmployeeArray,startIndex,endIndex)
+       updatePaginationBtn();
     }
   };
 
@@ -110,6 +116,7 @@ nextBtn.onclick = () => {
        startIndex = (currentPage - 1) * rowsPerPage;
        endIndex = startIndex + rowsPerPage;
        displayPaginationTable(globalEmployeeArray,startIndex,endIndex)
+       updatePaginationBtn();
      
     }
   };
@@ -117,28 +124,31 @@ nextBtn.onclick = () => {
      
 // // Function to handle page changes
 function changePage(page) {
-   
+   currentPage = page;
   startIndex = (page - 1) * rowsPerPage;
   endIndex = parseInt(startIndex) + parseInt(rowsPerPage);
+  console.log(globalEmployeeArray);
   
   displayPaginationTable(globalEmployeeArray,startIndex,endIndex)
+  updatePaginationBtn();
  }
 
 
 
 function displayPagButtons() {
    
-  var paginationContainer = document.getElementById('paglistBtnContainer');
-  let totalButtons = totalRows/ rowsPerPage
- 
+  const paginationContainer = document.getElementById('paglistBtnContainer');
+  // let totalButtons = totalRows/ rowsPerPage
+  totalPages = Math.ceil(totalRows/rowsPerPage);
   paginationContainer.innerHTML = ''
  
      // Dynamically create buttons using innerHTML
-     for (let i = 0; i < totalButtons; i++) {
+     for (let i = 0; i < totalPages; i++) {
          paginationContainer.innerHTML += `
          <button onclick="changePage(${i + 1})">${i + 1}</button>
      `;
     }
+    updatePaginationBtn();
 }
 
 // // handle page list entries
@@ -146,12 +156,20 @@ function changePageSize() {
    
   rowsPerPage = document.getElementById('rowsPerPage').value;
   let startIndex = (currentPage - 1) * rowsPerPage;
-  let endIndex = startIndex + rowsPerPage;  
+  let endIndex = startIndex + rowsPerPage; 
+  totalPages = Math.ceil(totalRows/rowsPerPage);
+  rowsPerPage = parseInt(initialRows.value)
+  currentPage = 1; 
  
   displayPaginationTable(globalEmployeeArray,startIndex,endIndex)  
-  
-  
+  displayPagButtons();
+  updatePaginationBtn();
+
 }
+
+displayPaginationTable(globalEmployeeArray,startIndex,endIndex);
+displayPagButtons();
+updatePaginationBtn();
 
   //   display employees in table
   function displayEmployees(dataArray) {
@@ -216,25 +234,41 @@ function changePageSize() {
  
 
 
+// Handle search input
 searchInput.addEventListener("keyup", () => {
-    const query = searchInput.value.toLowerCase();
-    if(!query){
-      startIndex = (currentPage - 1) * rowsPerPage;
-      endIndex = startIndex + rowsPerPage;
-      displayPaginationTable(globalEmployeeArray,startIndex,endIndex)
-    }
-    else{
-        const filteredEmployeeArray= globalEmployeeArray.filter(employee =>
-            employee.firstName.toLowerCase().includes(query) ||
-            employee.lastName.toLowerCase().includes(query) ||
-            employee.email.toLowerCase().includes(query) ||
-            employee.phone.includes(query)
-           );
-      startIndex = (currentPage - 1) * rowsPerPage;
-      endIndex = startIndex + rowsPerPage;
-      displayPaginationTable(filteredEmployeeArray,startIndex,endIndex)
-    }
-   
+  const query = searchInput.value.toLowerCase();
+  
+  let filteredEmployeeArray = globalEmployeeArray; // Default to the full employee array
+  
+  // If a query is provided, filter the employee array
+  if (query) {
+      filteredEmployeeArray = globalEmployeeArray.filter(employee =>
+          employee.firstName.toLowerCase().includes(query) ||
+          employee.lastName.toLowerCase().includes(query) ||
+          employee.email.toLowerCase().includes(query) ||
+          employee.phone.includes(query)
+      );
+  }
+
+  // Update total rows and pages based on filtered data
+  totalRows = filteredEmployeeArray.length;
+  totalPages = Math.ceil(totalRows / rowsPerPage);
+  
+  // Reset currentPage to 1 if we're on a page that no longer exists due to filtering
+  if (currentPage > totalPages) {
+      currentPage = totalPages;
+  }
+
+  // Calculate the start and end indices based on the current page
+  startIndex = (currentPage - 1) * rowsPerPage;
+  endIndex = startIndex + rowsPerPage;
+
+  // Display the filtered employees on the current page
+  displayPaginationTable(filteredEmployeeArray, startIndex, endIndex);
+  
+  // Update pagination buttons to reflect the correct state
+  displayPagButtons();
+  updatePaginationBtn();
 });
 
 
